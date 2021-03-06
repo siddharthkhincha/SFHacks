@@ -1,9 +1,10 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter_app/api/firebase_ml_api.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'controls_widget.dart';
+import 'text_area_widget.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
   @override
@@ -51,7 +52,8 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       );
 
   Future pickImage() async {
-    final file = await ImagePicker().getImage(source: ImageSource.gallery);
+    final file = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setImage(File(file.path));
   }
 
   Future scanText() async {
